@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const checkbox = document.querySelector('#font-toggle');
     const select = document.querySelector('#font-select');
-    const fontSizeInput = document.querySelector('#font-size-input');
-    const fontSizeDisplay = document.querySelector('#font-size-display');
+    const fontSizeSlider = document.querySelector('#font-size-slider');
+    const sizeValue = document.querySelector('#size-value');
 
     function sendMessageToActiveTab(message) {
         chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
@@ -21,41 +21,48 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    if (chrome?.storage?.sync) {
-        chrome.storage.sync.get(['fontEnabled', 'selectedFont', 'fontSize'], (data) => {
+    if (chrome?.storage?.local) {  // Changed from sync to local
+        chrome.storage.local.get(['fontEnabled', 'selectedFont', 'fontSize'], (data) => {
             checkbox.checked = data.fontEnabled || false;
             select.value = data.selectedFont || 'OpenDyslexic-Regular';
             select.disabled = !checkbox.checked;
-            fontSizeInput.value = data.fontSize || '16';
-            fontSizeDisplay.textContent = `${fontSizeInput.value}px`;
+            fontSizeSlider.value = data.fontSize || '16';
+            fontSizeSlider.disabled = !checkbox.checked;
+            sizeValue.textContent = `${fontSizeSlider.value}px`;
 
             sendMessageToActiveTab({
                 fontEnabled: checkbox.checked,
                 selectedFont: checkbox.checked ? select.value : null,
-                fontSize: fontSizeInput.value
+                fontSize: fontSizeSlider.value
             });
         });
 
         checkbox.addEventListener('change', function () {
-            chrome.storage.sync.set({ fontEnabled: checkbox.checked }, () => {
+            chrome.storage.local.set({ fontEnabled: checkbox.checked }, () => {  // Changed from sync to local
                 sendMessageToActiveTab({
                     fontEnabled: checkbox.checked,
                     selectedFont: checkbox.checked ? select.value : null,
+                    fontSize: fontSizeSlider.value
                 });
             });
             select.disabled = !checkbox.checked;
+            fontSizeSlider.disabled = !checkbox.checked;
         });
 
         select.addEventListener('change', function () {
-            chrome.storage.sync.set({ selectedFont: select.value }, () => {
+            chrome.storage.local.set({ selectedFont: select.value }, () => {  // Changed from sync to local
                 sendMessageToActiveTab({ selectedFont: select.value });
             });
         });
 
-        fontSizeInput.addEventListener('input', function () {
-            fontSizeDisplay.textContent = `${fontSizeInput.value}px`;
-            chrome.storage.sync.set({ fontSize: fontSizeInput.value }, () => {
-                sendMessageToActiveTab({ fontSize: fontSizeInput.value });
+        fontSizeSlider.addEventListener('input', function() {
+            sizeValue.textContent = `${this.value}px`;
+            chrome.storage.local.set({ fontSize: this.value }, () => {  // Changed from sync to local
+                sendMessageToActiveTab({
+                    fontSize: this.value,
+                    fontEnabled: checkbox.checked,
+                    selectedFont: select.value
+                });
             });
         });
     }

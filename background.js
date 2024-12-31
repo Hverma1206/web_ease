@@ -12,3 +12,22 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return true;
     }
 });
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    if (changeInfo.status === 'complete' && tab.url?.match(/^(http|https|file):\/\//)) {
+        chrome.storage.local.get(['fontEnabled', 'selectedFont', 'fontSize'], (data) => {
+            if (data.fontEnabled) {
+                chrome.scripting.executeScript({
+                    target: { tabId: tabId },
+                    files: ['content.js']
+                }).then(() => {
+                    chrome.tabs.sendMessage(tabId, {
+                        fontEnabled: data.fontEnabled,
+                        selectedFont: data.selectedFont || 'OpenDyslexic-Regular',
+                        fontSize: data.fontSize || '16'
+                    });
+                }).catch(() => {});
+            }
+        });
+    }
+});
