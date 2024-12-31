@@ -1,4 +1,4 @@
-# OpenDyslexic Font Switcher
+# Web-Ease (An OpenDyslexic Font Switcher)
 
 A Chrome extension that allows users to switch any website's font to OpenDyslexic, making text more readable for users with dyslexia.
 
