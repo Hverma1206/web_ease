@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="popup.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h2>OpenDyslexic</h2>
+        <div class="toggle-container">
+          <label class="toggle-switch">
+            <input type="checkbox" id="font-toggle" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </header>
+      
+      <div class="content">
+        <div class="font-card">
+          <div class="card-header">
+            <span class="material-icons">font_download</span>
+            <h3>Font Style</h3>
+          </div>
+          <div class="card-content">
+            <select id="font-select" disabled>
+              <option value="OpenDyslexic-Regular">Regular</option>
+              <option value="OpenDyslexic-Bold">Bold</option>
+              <option value="OpenDyslexic-Italic">Italic</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="info-box">
+          <span class="material-icons">info</span>
+          <p>This font is designed to help with dyslexia</p>
+        </div>
+      </div>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>

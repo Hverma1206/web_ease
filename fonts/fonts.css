@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'OpenDyslexic-Regular';
+    src: url('OpenDyslexic-Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'OpenDyslexic-Bold';
+    src: url('OpenDyslexic-Bold.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'OpenDyslexic-Italic';
+    src: url('OpenDyslexic-Italic.otf') format('opentype');
+}
