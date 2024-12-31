@@ -3,9 +3,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             if (tabs.length > 0) {
                 chrome.tabs.sendMessage(tabs[0].id, request, (response) => {
-                    if (!chrome.runtime.lastError) {
-                        sendResponse(response);
-                    }
+                    if (!chrome.runtime.lastError) sendResponse(response);
                 });
             }
         });

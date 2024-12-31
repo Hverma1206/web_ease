@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    if (chrome?.storage?.local) {  // Changed from sync to local
+    if (chrome?.storage?.local) {
         chrome.storage.local.get(['fontEnabled', 'selectedFont', 'fontSize'], (data) => {
             checkbox.checked = data.fontEnabled || false;
             select.value = data.selectedFont || 'OpenDyslexic-Regular';
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         checkbox.addEventListener('change', function () {
-            chrome.storage.local.set({ fontEnabled: checkbox.checked }, () => {  // Changed from sync to local
+            chrome.storage.local.set({ fontEnabled: checkbox.checked }, () => {
                 sendMessageToActiveTab({
                     fontEnabled: checkbox.checked,
                     selectedFont: checkbox.checked ? select.value : null,
@@ -50,14 +50,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         select.addEventListener('change', function () {
-            chrome.storage.local.set({ selectedFont: select.value }, () => {  // Changed from sync to local
+            chrome.storage.local.set({ selectedFont: select.value }, () => {
                 sendMessageToActiveTab({ selectedFont: select.value });
             });
         });
 
         fontSizeSlider.addEventListener('input', function() {
             sizeValue.textContent = `${this.value}px`;
-            chrome.storage.local.set({ fontSize: this.value }, () => {  // Changed from sync to local
+            chrome.storage.local.set({ fontSize: this.value }, () => {
                 sendMessageToActiveTab({
                     fontSize: this.value,
                     fontEnabled: checkbox.checked,
