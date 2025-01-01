@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "OpenDyslexic Font Switcher",
-  "description": "Change the font of any website to OpenDyslexic.",
+  "name": "Web-Ease: OpenDyslexic Font Switcher",
+  "description": "Simplifying web browsing for everyone",
   "version": "1.0",
   "permissions": [
     "storage",
