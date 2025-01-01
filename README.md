@@ -9,6 +9,7 @@ A Chrome extension that allows users to switch any website's font to OpenDyslexi
   - OpenDyslexic Regular
   - OpenDyslexic Bold
   - OpenDyslexic Italic
+- A slider to adjust font size according to personal needs.
 - Persistent settings across page refreshes and browser sessions
 - Works on all websites
 - Clean, modern user interface
@@ -25,6 +26,7 @@ A Chrome extension that allows users to switch any website's font to OpenDyslexi
 1. Click the extension icon in your Chrome toolbar
 2. Toggle the switch to enable/disable the OpenDyslexic font
 3. Select your preferred font style from the dropdown menu
+4. Use the slider to adjust the font size
 
 ## File Structure
 
